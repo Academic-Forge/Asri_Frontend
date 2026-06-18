@@ -8,8 +8,7 @@ import type { LoginInput } from '../schemas/authSchema';
 import { authService } from '../services/authService';
 
 /**
- * Clean, simplified Login Page.
- * Uses react-hook-form + zod for validation and handles API login.
+ * 
  */
 export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
