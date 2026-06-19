@@ -1,26 +1,29 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import Login from '../pages/Login';
-import Register from '../pages/Register';
+import DashboardLayout from '../components/layout/DashboardLayout';
+import Dashboard from '../pages/layout/dashboard';
+
 
 /**
  * Simplified Routing configuration for ASRI.
- * Maps "/login" and "/register" routes and redirects default "/" to "/login".
+ * Maps "/login", "/register", and "/dashboard" routes.
  */
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Navigate to="/login" replace />,
   },
   {
-    path: '/login',
-    element: <Login />,
+    path: '/dashboard',
+    element: <DashboardLayout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+    ],
   },
   {
-    path: '/register',
-    element: <Register />,
-  },
-  {
-    path: '*',
+    path: "*",
     element: <Navigate to="/login" replace />,
   },
 ]);

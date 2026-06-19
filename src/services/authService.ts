@@ -40,14 +40,10 @@ export const authService = {
   },
 
   /**
-   * Registers a new user.
+   * Registers a new user with role and profile data.
    */
-  register: async (data: Omit<RegisterInput, 'confirmPassword'>): Promise<AuthResponse> => {
-    const response = await api.post<AuthResponse>('/auth/register', {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-    });
+  register: async (data: RegisterInput): Promise<AuthResponse> => {
+    const response = await api.post<AuthResponse>('/auth/register', data);
 
     // Store credentials on success
     if (response.data.token) {
