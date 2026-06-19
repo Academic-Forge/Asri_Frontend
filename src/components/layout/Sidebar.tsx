@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard } from 'lucide-react';
-import logo from '../../assets/logo/logo.webp';
+import logo from '../../assets/img/logo-asri-1.webp';
 
 interface SidebarProps {
   isOpen: boolean;
