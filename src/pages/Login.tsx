@@ -8,7 +8,7 @@ import type { LoginInput } from '../schemas/authSchema';
 import { authService } from '../services/authService';
 
 /**
- 
+  
  */
 export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
