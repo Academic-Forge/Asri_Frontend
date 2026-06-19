@@ -1,9 +1,7 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
-import Login from "../pages/Login";
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+import DashboardLayout from '../components/layout/DashboardLayout';
+import Dashboard from '../pages/layout/dashboard';
 
-import DashboardLayout from "../components/layout/DashboardLayout";
-import Dashboard from "../pages/layout/dashboard";
-import { Register } from "../pages/auth/Register";
 
 /**
  * Simplified Routing configuration for ASRI.
@@ -15,15 +13,7 @@ export const router = createBrowserRouter([
     element: <Navigate to="/login" replace />,
   },
   {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/dashboard",
+    path: '/dashboard',
     element: <DashboardLayout />,
     children: [
       {
