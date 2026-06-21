@@ -4,6 +4,7 @@ import { ProductCard } from '../../../components/buyer/ProductCard';
 import { ProductFilter } from '../../../components/buyer/ProductFilter';
 import { svc } from '../../../services/buyer';
 import type { Product } from '../../../types/buyer';
+import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 
 export const CariProduk = () => {
   const [filterOpen, setFilterOpen] = useState(false);
@@ -18,6 +19,7 @@ export const CariProduk = () => {
 
   return (
     <section className="mx-auto w-full">
+      <Breadcrumbs items={[{ label: 'Belanja Komoditas' }]} />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-neutral">Cari Produk</h1>

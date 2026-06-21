@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Clock, Package, Store } from 'lucide-react';
 import { svc } from '../../../services/buyer';
 import type { Order } from '../../../types/buyer/order';
+import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 
 const statusColor: Record<string, string> = {
   Selesai: 'bg-secondary/10 text-secondary',
@@ -27,6 +28,7 @@ export const RiwayatPesanan = () => {
 
   return (
     <section className="mx-auto w-full animate-fade-in">
+      <Breadcrumbs items={[{ label: 'Riwayat Pesanan' }]} />
       <h1 className="text-xl sm:text-2xl font-bold text-neutral">Riwayat Pesanan</h1>
       <p className="mt-1 text-sm text-neutral/50">Daftar pesanan yang sudah selesai atau dikirim.</p>
 

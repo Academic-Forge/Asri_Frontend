@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Trash2, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { useCartStore } from '../../../store/cartStore';
+import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 
 export const Cart = () => {
   const { items, totalPrice, totalItems, removeItem, updateQuantity } = useCartStore();
@@ -23,6 +24,7 @@ export const Cart = () => {
 
   return (
     <section className="mx-auto w-full animate-fade-in">
+      <Breadcrumbs items={[{ label: 'Keranjang' }]} />
       <Link
         to="/buyer/search"
         className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-secondary transition-colors hover:text-primary"

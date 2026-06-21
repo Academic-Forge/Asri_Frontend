@@ -4,6 +4,7 @@ import { Star, Minus, Plus, ShoppingCart, ArrowLeft, Store } from 'lucide-react'
 import { useCartStore } from '../../../store/cartStore';
 import { svc } from '../../../services/buyer';
 import type { Product } from '../../../types/buyer';
+import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 
 export const DetailProduk = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -27,6 +28,7 @@ export const DetailProduk = () => {
 
   return (
     <section className="mx-auto w-full animate-fade-in">
+      <Breadcrumbs items={[{ label: 'Belanja Komoditas', to: '/buyer/search' }, { label: 'Detail Produk' }]} />
       <Link
         to="/buyer/search"
         className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-secondary transition-colors hover:text-primary"

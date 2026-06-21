@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Package, Clock, Store } from 'lucide-react';
 import { svc } from '../../../services/buyer';
 import type { Order } from '../../../types/buyer/order';
+import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 
 const tabs = [
   { key: 'semua', label: 'Semua' },
@@ -41,6 +42,7 @@ export const PesananSaya = () => {
 
   return (
     <section className="mx-auto w-full animate-fade-in">
+      <Breadcrumbs items={[{ label: 'Pesanan Saya' }]} />
       <h1 className="text-xl sm:text-2xl font-bold text-neutral">Pesanan Saya</h1>
       <p className="mt-1 text-sm text-neutral/50">Daftar pesanan yang masih aktif.</p>
 

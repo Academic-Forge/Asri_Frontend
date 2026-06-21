@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, MapPin, ChevronRight } from 'lucide-react';
+import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 import { ShippingCard } from '../../../components/buyer/ShippingCard';
 import { useCartStore } from '../../../store/cartStore';
 import { svc } from '../../../services/buyer';
@@ -24,6 +25,7 @@ export const Pengiriman = () => {
 
   return (
     <section className="mx-auto w-full animate-fade-in">
+      <Breadcrumbs items={[{ label: 'Checkout', to: '/buyer/checkout' }, { label: 'Pengiriman' }]} />
       <Link
         to="/buyer/checkout"
         className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-secondary transition-colors hover:text-primary"

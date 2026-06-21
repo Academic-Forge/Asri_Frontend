@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Building, Wallet, Banknote, ChevronRight } from 'lucide-react';
+import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 import { useCartStore } from '../../../store/cartStore';
 import { svc } from '../../../services/buyer';
 import type { PaymentOption } from '../../../types/buyer';
@@ -42,6 +43,7 @@ export const Pembayaran = () => {
 
   return (
     <section className="mx-auto w-full animate-fade-in">
+      <Breadcrumbs items={[{ label: 'Pengiriman', to: '/buyer/checkout/shipping' }, { label: 'Pembayaran' }]} />
       <Link
         to="/buyer/checkout/shipping"
         className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-secondary transition-colors hover:text-primary"
