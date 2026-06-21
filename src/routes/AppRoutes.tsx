@@ -1,12 +1,24 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import Login from '../pages/auth/Login';
-import Register from '../pages/auth/Register';
+import { lazy, Suspense } from 'react';
+import ProtectedRoute from '../components/auth/ProtectedRoute';
 import DashboardLayout from '../components/layout/DashboardLayout';
 import Dashboard from '../pages/layout/dashboard';
+import PlaceholderPage from '../pages/layout/PlaceholderPage';
+
+// Hanya lazy-load halaman auth (jarang diakses setelah login)
+const Login = lazy(() => import('../pages/auth/Login'));
+const Register = lazy(() => import('../pages/auth/Register'));
+
+const AuthLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="w-7 h-7 border-3 border-secondary border-t-transparent rounded-full animate-spin" />
+  </div>
+);
 
 /**
- * Routing configuration for ASRI.
- * Maps "/", "/login", "/register", and "/dashboard" routes.
+ * Konfigurasi routing ASRI.
+ * Dashboard pages di-import langsung (eager) supaya navigasi instan.
+ * Halaman auth di-lazy load karena hanya diakses sekali.
  */
 export const router = createBrowserRouter([
   {
@@ -15,19 +27,40 @@ export const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <Login />,
+    element: <Suspense fallback={<AuthLoader />}><Login /></Suspense>,
   },
   {
     path: '/register',
-    element: <Register />,
+    element: <Suspense fallback={<AuthLoader />}><Register /></Suspense>,
   },
   {
-    path: '/dashboard',
-    element: <DashboardLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <Dashboard />,
+        path: '/dashboard',
+        element: <DashboardLayout />,
+        children: [
+          {
+            index: true,
+            element: <Dashboard />,
+          },
+          {
+            path: 'analytics',
+            element: <PlaceholderPage name="Analisis" icon="analytics" />,
+          },
+          {
+            path: 'inventory',
+            element: <PlaceholderPage name="Inventori" icon="inventory_2" />,
+          },
+          {
+            path: 'transactions',
+            element: <PlaceholderPage name="Transaksi" icon="account_balance_wallet" />,
+          },
+          {
+            path: 'reports',
+            element: <PlaceholderPage name="Laporan" icon="description" />,
+          },
+        ],
       },
     ],
   },

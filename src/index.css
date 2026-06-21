@@ -3,6 +3,170 @@
 @theme {
   --color-primary: #064e3b;
   --color-secondary: #10b981;
+  --color-tertiary: #f0fdf4;
+  --color-neutral: #1f2937;
+  
   --color-primary-hover: #043a2c;
   --color-secondary-hover: #0e9f6e;
+
+  /* Custom palette matching the HTML dashboard layouts */
+  --color-on-tertiary-container: #a8b5ad;
+  --color-on-secondary: #ffffff;
+  --color-inverse-surface: #27313f;
+  
+  --color-background: #f0fdf4; /* Tertiary bg #f0fdf4 */
+  --color-on-tertiary-fixed: #131e19;
+  --color-tertiary-container: #3b4741;
+  --color-surface-bright: #f0fdf4;
+  --color-outline: #707974;
+  --color-secondary-container: #d1fae5; /* soft secondary light green container */
+  --color-on-secondary-fixed: #002113;
+  --color-surface-container-lowest: #ffffff;
+  --color-error: #ba1a1a;
+  --color-tertiary-fixed-dim: #bdcac1;
+  --color-surface-variant: #e6f7ef;
+  --color-secondary-fixed: #6ffbbe;
+  --color-on-primary-fixed-variant: #0b513d;
+  --color-on-primary-fixed: #002117;
+  --color-inverse-on-surface: #eaf1ff;
+  --color-outline-variant: #cbd5e1;
+  --color-on-primary-container: #80bea6;
+  --color-surface-dim: #d1fae5;
+  --color-primary-fixed: #b0f0d6;
+  --color-on-primary: #ffffff;
+  --color-on-background: #1f2937; /* Neutral #1f2937 */
+  --color-primary-container: #064e3b;
+  --color-surface-container-low: #f8fafc;
+  --color-inverse-primary: #95d3ba;
+  --color-surface-container-high: #e2e8f0;
+  --color-secondary-fixed-dim: #4edea3;
+  --color-error-container: #ffdad6;
+  --color-primary-fixed-dim: #95d3ba;
+  --color-on-error: #ffffff;
+  --color-tertiary-fixed: #d9e6dd;
+  --color-on-error-container: #93000a;
+  --color-on-surface-variant: #4b5563;
+  --color-on-tertiary: #ffffff;
+  --color-surface-container: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-surface-tint: #064e3b;
+  --color-surface-container-highest: #cbd5e1;
+  --color-on-surface: #1f2937; /* Neutral #1f2937 */
+  --color-on-secondary-container: #064e3b;
+  --color-on-tertiary-fixed-variant: #3e4943;
+  --color-on-secondary-fixed-variant: #064e3b;
+
+  /* Custom spacings and layout units from the HTML */
+  --spacing-stack-unit: 8px;
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 16px;
+  --spacing-container-max: 1280px;
+  --spacing-margin-desktop: 48px;
+
+  /* Animation definitions */
+  --animate-fade-in: fade-in 0.2s ease-out;
+  --animate-slide-down: slide-down 0.15s ease-out;
+  --animate-slide-left: slide-left 0.2s ease-out;
+  --animate-scale-up: scale-up 0.15s ease-out;
+}
+
+/* Keyframe Animations - ringan dan cepat */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-left {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes scale-up {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Typography Utilities */
+@utility font-label-sm {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+@utility text-label-sm {
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+
+@utility font-headline-md {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+@utility text-headline-md {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+@utility font-display-lg-mobile {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+@utility text-display-lg-mobile {
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+@utility font-display-lg {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+@utility text-display-lg {
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+@utility font-body-md {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+@utility text-body-md {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+@utility font-body-lg {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+@utility text-body-lg {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+/* Scrollbar minimal styling */
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+/* Ensure smooth rendering */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
