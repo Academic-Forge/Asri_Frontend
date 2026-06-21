@@ -25,7 +25,7 @@ export const TextAreaInput: React.FC<TextAreaInputProps> = ({
       <textarea
         id={id}
         rows={rows}
-        className={`w-full px-4 py-3 text-sm bg-slate-50 border border-slate-200 rounded-xl placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 ${
+        className={`w-full px-5 py-3.5 text-sm sm:text-base bg-slate-50 border border-slate-200 rounded-xl placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 ${
           error ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/10' : ''
         }`}
         {...register}

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { ShoppingBag, Store, Truck, ShieldCheck } from 'lucide-react';
-import logoAsri from '../../assets/img/logo-asri.webp';
+// import logoAsri from '../../assets/img/logo-asri.webp';
 import daunPepaya from '../../assets/img/daun-pepaya.jpg';
 
 // Sub-form components
@@ -121,9 +121,7 @@ export const Register = () => {
 
         {/* Brand Header */}
         <div className="flex items-center gap-3 relative z-10">
-          <div className="bg-white/10 p-2.5 rounded-2xl backdrop-blur-md border border-white/10 shadow-lg">
-            <img src={logoAsri} alt="ASRI Logo" className="h-9 w-auto object-contain" />
-          </div>
+       
           <span className="text-xl font-bold tracking-wider">ASRI E-Commerce</span>
         </div>
 
@@ -165,9 +163,7 @@ export const Register = () => {
           
           {/* Greeting Header */}
           <div className="space-y-2 text-center lg:text-left">
-            <div className="lg:hidden flex justify-center mb-4">
-              <img src={logoAsri} alt="ASRI Logo" className="h-14 w-auto object-contain" />
-            </div>
+         
             <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Daftar Akun Baru</h2>
             <p className="text-sm text-slate-500 font-medium">Pilih peran Anda untuk mulai menggunakan ekosistem ASRI.</p>
           </div>
