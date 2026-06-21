@@ -91,7 +91,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const role = user.role || 'seller'; // Default fallback to seller
   const isBuyer = role === 'buyer';
   const logoTo = isBuyer ? '/buyer/search' : '/dashboard';
-  const showLogo = !isBuyer;
+  const showLogo = true;
 
   // Resolve dynamic nav items based on role
   const roleNavItems = MENU_BY_ROLE[role] || MENU_BY_ROLE['seller'];

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { ShoppingCart, Menu } from 'lucide-react';
 import type { User } from '../../types/user';
 import { useCartStore } from '../../store/cartStore';
-import textAndLogo from '../../assets/img/logo-asri-2.webp';
 import { ProfileDropdown } from './ProfileDropdown';
 
 const getStoredUser = (): User => {
@@ -42,18 +41,9 @@ export const Navbar = ({ onMenuClick, variant = 'dashboard' }: NavbarProps) => {
         >
           <Menu className="h-6 w-6 sm:h-7 sm:w-7" />
         </button>
-        {variant === 'buyer' ? (
-          <Link
-            to="/buyer/search"
-            className="flex items-center"
-          >
-            <img src={textAndLogo} alt="ASRI" className="h-7 sm:h-10 w-auto filter brightness-110" />
-          </Link>
-        ) : (
-          <span className="font-extrabold text-slate-900 text-lg sm:text-xl tracking-tight">
-            {getDashboardTitle(user.role || 'seller')}
-          </span>
-        )}
+        <span className="font-extrabold text-slate-900 text-lg sm:text-xl tracking-tight">
+          {getDashboardTitle(user.role || 'seller')}
+        </span>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4">
