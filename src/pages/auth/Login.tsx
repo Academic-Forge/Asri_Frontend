@@ -7,7 +7,6 @@ import { Mail, Lock } from 'lucide-react';
 import { loginSchema } from '../../schemas/authSchema';
 import type { LoginInput } from '../../schemas/authSchema';
 import { authService } from '../../services/authService';
-// import logoAsri from '../../assets/img/logo-asri.webp';
 import daunPepaya from '../../assets/img/daun-pepaya.jpg';
 import { FormInput } from '../../components/ui/FormInput';
 

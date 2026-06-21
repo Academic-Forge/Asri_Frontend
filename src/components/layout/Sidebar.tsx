@@ -7,18 +7,31 @@ import {
   ClipboardList,
   User as UserIcon,
   LogOut,
-  ShoppingBag,
   Truck,
   ShieldCheck,
-  UserCheck
+  UserCheck,
+  Search,
+  Clock,
+  ShoppingCart,
+  type LucideIcon
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import logo from '../../assets/img/logo-asri-1.webp';
 import type { User } from '../../types/user';
 
+interface NavItem {
+  label: string;
+  icon: LucideIcon;
+  to: string;
+}
+
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  navItems?: NavItem[];
+  logoTo?: string;
+  footerText?: string;
+  showLogo?: boolean;
 }
 
 const getStoredUser = (): User => {
@@ -52,10 +65,10 @@ const MENU_BY_ROLE = {
     { type: 'item', label: 'Lihat Pesanan', icon: ClipboardList, to: '/dashboard/seller/pesanan' },
   ],
   buyer: [
-    { type: 'item', label: 'Dashboard Buyer', icon: LayoutDashboard, to: '/dashboard/buyer' },
-    { type: 'header', label: 'Menu Buyer', icon: null, to: '' },
-    { type: 'item', label: 'Belanja Komoditas', icon: ShoppingBag, to: '/dashboard/buyer/shop' },
-    { type: 'item', label: 'Pesanan Saya', icon: ClipboardList, to: '/dashboard/buyer/orders' },
+    { type: 'item', label: 'Cari Produk', icon: Search, to: '/buyer/search' },
+    { type: 'item', label: 'Riwayat Pesanan', icon: Clock, to: '/buyer/history' },
+    { type: 'item', label: 'Keranjang', icon: ShoppingCart, to: '/buyer/cart' },
+    { type: 'item', label: 'Pesanan Saya', icon: Package, to: '/buyer/orders' },
   ],
   driver: [
     { type: 'item', label: 'Dashboard Driver', icon: LayoutDashboard, to: '/dashboard/driver' },
@@ -76,6 +89,9 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const navigate = useNavigate();
   const user = getStoredUser();
   const role = user.role || 'seller'; // Default fallback to seller
+  const isBuyer = role === 'buyer';
+  const logoTo = isBuyer ? '/buyer/search' : '/dashboard';
+  const showLogo = true;
 
   // Resolve dynamic nav items based on role
   const roleNavItems = MENU_BY_ROLE[role] || MENU_BY_ROLE['seller'];
@@ -109,20 +125,22 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       />
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r border-emerald-950/20 bg-[#022c22] transition-all duration-300 lg:relative ${
+        className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r border-emerald-950/20 bg-[#022c22] transition-all duration-300 lg:sticky lg:top-0 lg:h-screen ${
           isOpen
             ? 'w-64 translate-x-0 opacity-100'
             : 'w-64 -translate-x-full lg:translate-x-0 lg:w-0 lg:opacity-0 lg:overflow-hidden lg:border-r-0'
         }`}
       >
-        <div className="flex h-16 items-center justify-start px-6 border-b border-white/5 sm:h-20 gap-3">
-          <Link to="/dashboard" onClick={handleLinkClick} className="flex items-center gap-3">
-            <img src={logo} alt="ASRI" className="h-9 w-auto transition-transform hover:scale-105 filter brightness-110" />
-            <span className="font-extrabold text-2xl text-white tracking-wider">ASRI</span>
-          </Link>
-        </div>
+        {showLogo && (
+          <div className="flex h-16 items-center justify-start px-6 border-b border-white/5 sm:h-20 gap-3">
+            <Link to={logoTo} onClick={handleLinkClick} className="flex items-center gap-3">
+              <img src={logo} alt="ASRI" className="h-9 w-auto transition-transform hover:scale-105 filter brightness-110" />
+              <span className="font-extrabold text-2xl text-white tracking-wider">ASRI</span>
+            </Link>
+          </div>
+        )}
 
-        <nav className="flex-1 space-y-1 p-3">
+        <nav className={`flex-1 space-y-1 p-3 ${showLogo ? '' : 'pt-6 sm:pt-8'}`}>
           {activeNavItems.map((item, index) => {
             if (item.type === 'header') {
               return (
@@ -134,7 +152,6 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
                 </div>
               );
             }
-
             const isActive = pathname === item.to;
             const Icon = item.icon;
 

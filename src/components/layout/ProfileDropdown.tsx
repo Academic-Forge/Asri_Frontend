@@ -7,9 +7,10 @@ import defaultAvatar from '../../assets/default-avatar.jpg';
 
 interface ProfileDropdownProps {
   user: UserType | null;
+  fallbackName?: string;
 }
 
-export const ProfileDropdown = ({ user }: ProfileDropdownProps) => {
+export const ProfileDropdown = ({ user, fallbackName = 'User' }: ProfileDropdownProps) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -32,11 +33,11 @@ export const ProfileDropdown = ({ user }: ProfileDropdownProps) => {
       >
         <img
           src={user?.avatar || defaultAvatar}
-          alt={user?.name ?? 'User'}
+          alt={user?.name ?? fallbackName}
           className="h-9 sm:h-11 w-9 sm:w-11 rounded-full object-cover border-2 border-primary/20 transition-shadow hover:border-secondary/50 shadow-sm"
         />
         <span className="hidden sm:inline text-sm sm:text-base font-bold text-neutral">
-          {user?.name ?? 'User'}
+          {user?.name ?? fallbackName}
         </span>
         <ChevronDown
           className={`hidden sm:block h-4.5 w-4.5 sm:h-5 sm:w-5 text-neutral/50 transition-transform duration-200 ${
@@ -50,12 +51,12 @@ export const ProfileDropdown = ({ user }: ProfileDropdownProps) => {
           <div className="flex items-center gap-3 border-b border-primary/10 pb-3">
             <img
               src={user?.avatar || defaultAvatar}
-              alt={user?.name ?? 'User'}
+              alt={user?.name ?? fallbackName}
               className="h-12 w-12 rounded-full object-cover border-2 border-primary/20 shadow-sm"
             />
             <div className="min-w-0">
               <p className="truncate text-sm sm:text-base font-bold text-neutral">
-                {user?.name ?? 'User'}
+                {user?.name ?? fallbackName}
               </p>
               <p className="truncate text-xs sm:text-sm text-neutral/50">
                 {user?.email ?? '-'}

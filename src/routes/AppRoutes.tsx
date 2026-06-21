@@ -13,14 +13,26 @@ import ViewOrders from '../pages/seller/pesanan/ViewOrders';
 // User Settings Page
 import UserData from '../pages/user/data-user/UserData';
 
+// Buyer UI Pages
+import CariProduk from '../pages/buyer/produk/CariProduk';
+import DetailProduk from '../pages/buyer/produk/DetailProduk';
+import Checkout from '../pages/buyer/checkout/Checkout';
+import Pengiriman from '../pages/buyer/checkout/Pengiriman';
+import Pembayaran from '../pages/buyer/checkout/Pembayaran';
+import Cart from '../pages/buyer/checkout/Cart';
+import RiwayatPesanan from '../pages/buyer/pesanan/RiwayatPesanan';
+import PesananSaya from '../pages/buyer/pesanan/PesananSaya';
+
+import RootRedirect from './RootRedirect';
+
 /**
  * Routing configuration for ASRI.
- * Maps "/", "/login", "/register", and "/dashboard" layout sub-routes.
+ * Maps "/", "/login", "/register", "/dashboard", and "/buyer" layout routes.
  */
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Navigate to="/login" replace />,
+    path: '/',
+    element: <RootRedirect />,
   },
   {
     path: '/login',
@@ -61,7 +73,49 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "*",
+    path: '/buyer',
+    element: <DashboardLayout variant="buyer" />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="/buyer/search" replace />,
+      },
+      {
+        path: 'search',
+        element: <CariProduk />,
+      },
+      {
+        path: 'product/:slug',
+        element: <DetailProduk />,
+      },
+      {
+        path: 'checkout',
+        element: <Checkout />,
+      },
+      {
+        path: 'checkout/shipping',
+        element: <Pengiriman />,
+      },
+      {
+        path: 'checkout/payment',
+        element: <Pembayaran />,
+      },
+      {
+        path: 'cart',
+        element: <Cart />,
+      },
+      {
+        path: 'history',
+        element: <RiwayatPesanan />,
+      },
+      {
+        path: 'orders',
+        element: <PesananSaya />,
+      },
+    ],
+  },
+  {
+    path: '*',
     element: <Navigate to="/login" replace />,
   },
 ]);
