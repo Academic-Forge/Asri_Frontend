@@ -101,7 +101,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
     { type: 'item', label: 'Profil Saya', icon: UserIcon, to: '/dashboard/user/data-user' },
   ];
 
-  const activeNavItems = isBuyer ? roleNavItems : [...roleNavItems, ...settingsNavItems];
+  const activeNavItems = [...roleNavItems, ...settingsNavItems];
 
   const handleLogout = () => {
     localStorage.removeItem('user');
