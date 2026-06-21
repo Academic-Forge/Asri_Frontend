@@ -125,7 +125,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       />
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r border-emerald-950/20 bg-[#022c22] transition-all duration-300 lg:relative ${
+        className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r border-emerald-950/20 bg-[#022c22] transition-all duration-300 lg:sticky lg:top-0 lg:h-screen ${
           isOpen
             ? 'w-64 translate-x-0 opacity-100'
             : 'w-64 -translate-x-full lg:translate-x-0 lg:w-0 lg:opacity-0 lg:overflow-hidden lg:border-r-0'
