@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, useNavigate } from 'react-router-dom';
@@ -19,6 +19,14 @@ export const Login = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
+  // Auto-redirect jika sudah login
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [navigate]);
+
   const {
     register,
     handleSubmit,
@@ -32,8 +40,8 @@ export const Login = () => {
     try {
       await authService.login(data);
       toast.success('Login berhasil!');
-      toast('Menavigasi ke beranda...', { icon: '🚀' });
-      navigate('/');
+      // Langsung navigasi tanpa delay
+      navigate('/dashboard', { replace: true });
     } catch (error: unknown) {
       const err = error as { response?: { data?: { message?: string } }; message?: string };
       const errMsg = err.response?.data?.message || err.message || 'Login gagal';

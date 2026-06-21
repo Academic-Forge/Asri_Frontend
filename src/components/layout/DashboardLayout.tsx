@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Navbar } from './Navbar';
 import { Sidebar } from './Sidebar';
@@ -6,14 +6,21 @@ import { Sidebar } from './Sidebar';
 export const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const openSidebar = useCallback(() => setSidebarOpen(true), []);
+  const closeSidebar = useCallback(() => setSidebarOpen(false), []);
+
   return (
-    <div className="flex min-h-screen flex-col bg-tertiary">
-      <Navbar onMenuClick={() => setSidebarOpen(true)} />
+    <div className="min-h-screen bg-background text-on-surface font-body-md flex w-full">
+      {/* Sidebar Component */}
+      <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
 
-      <div className="flex flex-1">
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      {/* Main Content Wrapper */}
+      <div className="flex-1 flex flex-col md:ml-64 w-full min-h-screen">
+        {/* Sticky Top Navbar */}
+        <Navbar onMenuClick={openSidebar} />
 
-        <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-8">
+        {/* Main page content container */}
+        <main className="flex-grow p-4 md:p-gutter max-w-[1280px] mx-auto w-full">
           <Outlet />
         </main>
       </div>
