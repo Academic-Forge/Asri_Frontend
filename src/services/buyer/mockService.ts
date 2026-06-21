@@ -69,7 +69,8 @@ export const buyerMockService = {
     return found ? { name: found.name, cost: found.cost } : { name: '-', cost: 0 };
   },
 
-  createOrder: async (_data: CreateOrderRequest): Promise<CreateOrderResponse> => {
+  createOrder: async (data: CreateOrderRequest): Promise<CreateOrderResponse> => {
+    console.log('Mocking order creation with data:', data);
     await delay(500);
     return { orderId: `INV-${String(Date.now()).slice(-6)}` };
   },

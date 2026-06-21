@@ -23,23 +23,7 @@ import Cart from '../pages/buyer/checkout/Cart';
 import RiwayatPesanan from '../pages/buyer/pesanan/RiwayatPesanan';
 import PesananSaya from '../pages/buyer/pesanan/PesananSaya';
 
-import type { User } from '../types/user';
-
-const RootRedirect = () => {
-  const stored = localStorage.getItem('user');
-  if (!stored) {
-    return <Navigate to="/login" replace />;
-  }
-  try {
-    const user = JSON.parse(stored) as User;
-    if (user.role === 'buyer') {
-      return <Navigate to="/buyer/search" replace />;
-    }
-    return <Navigate to="/dashboard" replace />;
-  } catch {
-    return <Navigate to="/login" replace />;
-  }
-};
+import RootRedirect from './RootRedirect';
 
 /**
  * Routing configuration for ASRI.
