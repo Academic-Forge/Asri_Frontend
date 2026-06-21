@@ -33,8 +33,8 @@ export const FormInput: React.FC<FormInputProps> = ({
         <input
           id={id}
           type={type}
-          className={`w-full py-3 text-sm bg-slate-50 border border-slate-200 rounded-xl placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 ${
-            icon ? 'pl-11' : 'px-4'
+          className={`w-full py-3.5 text-sm sm:text-base bg-slate-50 border border-slate-200 rounded-xl placeholder-slate-400 focus:outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-200 ${
+            icon ? 'pl-12' : 'px-5'
           } ${
             error ? 'border-rose-500 focus:border-rose-500 focus:ring-rose-500/10' : ''
           }`}

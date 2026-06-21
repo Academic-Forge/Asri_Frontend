@@ -17,38 +17,38 @@ export const Dashboard = () => {
   const [user] = useState<User | null>(getStoredUser);
 
   return (
-    <section className="mx-auto max-w-6xl space-y-6 sm:space-y-8">
-      <div className="animate-fade-in relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-secondary p-6 sm:p-8">
+    <section className="space-y-6 sm:space-y-8 w-full animate-fade-in">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-secondary p-8 sm:p-10 shadow-md">
         <div className="relative z-10">
-          <div className="flex items-center gap-2 text-white/80 text-xs sm:text-sm font-medium uppercase tracking-wider">
-            <Sparkles className="h-4 w-4" />
+          <div className="flex items-center gap-2.5 text-white/90 text-sm sm:text-base font-extrabold uppercase tracking-wider">
+            <Sparkles className="h-5 w-5 text-secondary" />
             Dashboard
           </div>
-          <h1 className="mt-2 text-xl sm:text-3xl font-bold text-white">
+          <h1 className="mt-3.5 text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
             Selamat Datang, {user?.name ?? 'User'}!
           </h1>
-          <p className="mt-1 text-sm sm:text-base text-white/70">
+          <p className="mt-2 text-sm sm:text-lg text-white/80 max-w-xl leading-relaxed">
             Kelola dan pantau aktivitas ASRI dengan mudah.
           </p>
         </div>
-        <div className="absolute -bottom-4 -right-4 h-32 w-32 rounded-full bg-white/5 sm:h-48 sm:w-48" />
-        <div className="absolute -bottom-8 -right-8 h-24 w-24 rounded-full bg-white/5 sm:h-36 sm:w-36" />
+        <div className="absolute -bottom-4 -right-4 h-32 w-32 rounded-full bg-white/5 sm:h-48 sm:w-48 animate-pulse" />
+        <div className="absolute -bottom-8 -right-8 h-24 w-24 rounded-full bg-white/5 sm:h-36 sm:w-36 animate-pulse" />
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
         {stats.map((item, i) => (
           <div
             key={item.label}
-            className="animate-slide-up rounded-xl border border-primary/10 bg-white p-4 sm:p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+            className="animate-slide-up rounded-2xl border border-primary/10 bg-white p-6 sm:p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
             style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}
           >
             <div className="flex items-center justify-between">
-              <span className={`rounded-lg p-2 sm:p-2.5 ${item.color} transition-transform group-hover:scale-110`}>
-                <item.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+              <span className={`rounded-xl p-3 sm:p-3.5 ${item.color} transition-transform group-hover:scale-110 shadow-sm`}>
+                <item.icon className="h-6 w-6 sm:h-7 sm:w-7" />
               </span>
             </div>
-            <p className="mt-4 text-2xl sm:text-3xl font-bold text-neutral">{item.value}</p>
-            <p className="mt-1 text-xs sm:text-sm text-neutral/50">{item.label}</p>
+            <p className="mt-5 text-3xl sm:text-4xl font-extrabold text-neutral tracking-tight">{item.value}</p>
+            <p className="mt-1.5 text-xs sm:text-sm text-neutral/50 font-bold uppercase tracking-wider">{item.label}</p>
           </div>
         ))}
       </div>

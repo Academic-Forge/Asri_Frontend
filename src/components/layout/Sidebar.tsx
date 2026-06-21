@@ -1,18 +1,103 @@
-import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { 
+  LayoutDashboard, 
+  Store, 
+  Package, 
+  Boxes, 
+  ClipboardList,
+  User as UserIcon,
+  LogOut,
+  ShoppingBag,
+  Truck,
+  ShieldCheck,
+  UserCheck
+} from 'lucide-react';
+import toast from 'react-hot-toast';
 import logo from '../../assets/img/logo-asri-1.webp';
+import type { User } from '../../types/user';
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const navItems = [
-  { label: 'Dashboard', icon: LayoutDashboard, to: '/dashboard' },
-];
+const getStoredUser = (): User => {
+  const stored = localStorage.getItem('user');
+  return stored
+    ? (JSON.parse(stored) as User)
+    : { id: 'USR-8021', name: 'Seller', email: 'Seller1@asrii.com', role: 'seller' };
+};
+
+const getInitials = (name: string) => {
+  return name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+};
+
+const MENU_BY_ROLE = {
+  admin: [
+    { type: 'item', label: 'Dashboard Admin', icon: LayoutDashboard, to: '/dashboard/admin' },
+    { type: 'header', label: 'Manajemen', icon: null, to: '' },
+    { type: 'item', label: 'Verifikasi Seller', icon: UserCheck, to: '/dashboard/admin/verifikasi' },
+  ],
+  seller: [
+    { type: 'item', label: 'Dashboard Seller', icon: LayoutDashboard, to: '/dashboard' },
+    { type: 'header', label: 'Menu Seller', icon: null, to: '' },
+    { type: 'item', label: 'Buat Toko', icon: Store, to: '/dashboard/seller/toko/create' },
+    { type: 'item', label: 'Kelola Produk', icon: Package, to: '/dashboard/seller/produk' },
+    { type: 'item', label: 'Kelola Stok', icon: Boxes, to: '/dashboard/seller/stok' },
+    { type: 'item', label: 'Lihat Pesanan', icon: ClipboardList, to: '/dashboard/seller/pesanan' },
+  ],
+  buyer: [
+    { type: 'item', label: 'Dashboard Buyer', icon: LayoutDashboard, to: '/dashboard/buyer' },
+    { type: 'header', label: 'Menu Buyer', icon: null, to: '' },
+    { type: 'item', label: 'Belanja Komoditas', icon: ShoppingBag, to: '/dashboard/buyer/shop' },
+    { type: 'item', label: 'Pesanan Saya', icon: ClipboardList, to: '/dashboard/buyer/orders' },
+  ],
+  driver: [
+    { type: 'item', label: 'Dashboard Driver', icon: LayoutDashboard, to: '/dashboard/driver' },
+    { type: 'header', label: 'Menu Kurir', icon: null, to: '' },
+    { type: 'item', label: 'Ambil Antrean', icon: Truck, to: '/dashboard/driver/queue' },
+    { type: 'item', label: 'Pengantaran Aktif', icon: ClipboardList, to: '/dashboard/driver/deliveries' },
+  ],
+  validator: [
+    { type: 'item', label: 'Dashboard Validator', icon: LayoutDashboard, to: '/dashboard/validator' },
+    { type: 'header', label: 'Menu Validator', icon: null, to: '' },
+    { type: 'item', label: 'Daftar Antrean', icon: ClipboardList, to: '/dashboard/validator/queue' },
+    { type: 'item', label: 'Hasil Inspeksi', icon: ShieldCheck, to: '/dashboard/validator/inspections' },
+  ],
+};
 
 export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const user = getStoredUser();
+  const role = user.role || 'seller'; // Default fallback to seller
+
+  // Resolve dynamic nav items based on role
+  const roleNavItems = MENU_BY_ROLE[role] || MENU_BY_ROLE['seller'];
+
+  const settingsNavItems = [
+    { type: 'header', label: 'Pengaturan', icon: null, to: '' },
+    { type: 'item', label: 'Profil Saya', icon: UserIcon, to: '/dashboard/user/data-user' },
+  ];
+
+  const activeNavItems = [...roleNavItems, ...settingsNavItems];
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    toast.success('Berhasil keluar!');
+    navigate('/login');
+  };
+
+  const handleLinkClick = () => {
+    if (window.innerWidth < 1024) {
+      onClose();
+    }
+  };
 
   return (
     <>
@@ -24,44 +109,80 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       />
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-primary/10 bg-white transition-all duration-300 lg:relative lg:translate-x-0 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r border-emerald-950/20 bg-[#022c22] transition-all duration-300 lg:relative ${
+          isOpen
+            ? 'w-64 translate-x-0 opacity-100'
+            : 'w-64 -translate-x-full lg:translate-x-0 lg:w-0 lg:opacity-0 lg:overflow-hidden lg:border-r-0'
         }`}
       >
-        <div className="flex h-14 items-center justify-center border-b border-primary/10 sm:h-16">
-          <Link to="/dashboard" onClick={onClose}>
-            <img src={logo} alt="ASRI" className="h-8 w-auto transition-transform hover:scale-105" />
+        <div className="flex h-16 items-center justify-start px-6 border-b border-white/5 sm:h-20 gap-3">
+          <Link to="/dashboard" onClick={handleLinkClick} className="flex items-center gap-3">
+            <img src={logo} alt="ASRI" className="h-9 w-auto transition-transform hover:scale-105 filter brightness-110" />
+            <span className="font-extrabold text-2xl text-white tracking-wider">ASRI</span>
           </Link>
         </div>
 
-        <nav className="flex-1 space-y-1 p-4">
-          {navItems.map((item) => {
+        <nav className="flex-1 space-y-1 p-3">
+          {activeNavItems.map((item, index) => {
+            if (item.type === 'header') {
+              return (
+                <div
+                  key={`header-${index}`}
+                  className="pt-4 pb-1 px-3 text-[10px] font-extrabold text-emerald-400/50 uppercase tracking-widest"
+                >
+                  {item.label}
+                </div>
+              );
+            }
+
             const isActive = pathname === item.to;
+            const Icon = item.icon;
 
             return (
               <Link
                 key={item.to}
                 to={item.to}
-                onClick={onClose}
-                className={`group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
+                onClick={handleLinkClick}
+                className={`group flex items-center gap-3.5 rounded-xl px-4 py-3 text-sm sm:text-base font-bold transition-all duration-200 ${
                   isActive
-                    ? 'bg-secondary text-white shadow-sm shadow-secondary/30'
-                    : 'text-neutral hover:bg-primary/5 hover:pl-4'
+                    ? 'bg-secondary text-white shadow-md shadow-secondary/20'
+                    : 'text-emerald-100/70 hover:bg-white/10 hover:text-white'
                 }`}
               >
-                <item.icon
-                  className={`h-5 w-5 transition-transform duration-200 ${
-                    isActive ? '' : 'group-hover:scale-110'
-                  }`}
-                />
-                {item.label}
+                {Icon && (
+                  <Icon
+                    className={`h-5 w-5 sm:h-6 sm:w-6 transition-transform duration-200 ${
+                      isActive ? 'text-white' : 'text-emerald-300/50 group-hover:text-white'
+                    }`}
+                  />
+                )}
+                <span className="truncate">{item.label}</span>
               </Link>
             );
           })}
         </nav>
 
-        <div className="border-t border-primary/10 p-4">
-          <p className="text-center text-xs text-neutral/30">ASRI v1.0.0</p>
+        <div className="border-t border-white/5 p-5 flex items-center justify-between gap-3 bg-emerald-950/25">
+          <div className="flex items-center gap-3.5 min-w-0">
+            {user.avatar ? (
+              <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full object-cover shrink-0 shadow-sm" />
+            ) : (
+              <div className="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-sm">
+                {getInitials(user.name)}
+              </div>
+            )}
+            <div className="min-w-0">
+              <p className="text-sm font-bold text-white truncate leading-none">{user.name}</p>
+              <p className="text-xs text-emerald-400 font-extrabold mt-1.5 tracking-wider leading-none uppercase">{role}</p>
+            </div>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="p-2.5 hover:bg-white/10 text-emerald-300 hover:text-white rounded-xl transition-colors cursor-pointer shrink-0"
+            title="Keluar"
+          >
+            <LogOut size={18} />
+          </button>
         </div>
       </aside>
     </>
