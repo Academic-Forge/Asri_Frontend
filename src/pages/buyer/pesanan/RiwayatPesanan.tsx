@@ -17,7 +17,7 @@ export const RiwayatPesanan = () => {
 
   if (orders.length === 0) {
     return (
-      <section className="mx-auto max-w-4xl animate-fade-in text-center py-16 sm:py-24">
+      <section className="mx-auto w-full animate-fade-in text-center py-16 sm:py-24">
         <Clock className="mx-auto h-16 w-16 text-neutral/20" />
         <h2 className="mt-4 text-lg font-semibold text-neutral">Belum Ada Riwayat</h2>
         <p className="mt-1 text-sm text-neutral/50">Pesanan yang selesai akan muncul di sini.</p>
@@ -26,7 +26,7 @@ export const RiwayatPesanan = () => {
   }
 
   return (
-    <section className="mx-auto max-w-4xl animate-fade-in">
+    <section className="mx-auto w-full animate-fade-in">
       <h1 className="text-xl sm:text-2xl font-bold text-neutral">Riwayat Pesanan</h1>
       <p className="mt-1 text-sm text-neutral/50">Daftar pesanan yang sudah selesai atau dikirim.</p>
 

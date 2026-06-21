@@ -19,14 +19,14 @@ export const DetailProduk = () => {
 
   if (!product) {
     return (
-      <section className="mx-auto max-w-5xl animate-fade-in text-center py-16">
+      <section className="mx-auto w-full animate-fade-in text-center py-16">
         <p className="text-neutral/50">Memuat produk...</p>
       </section>
     );
   }
 
   return (
-    <section className="mx-auto max-w-5xl animate-fade-in">
+    <section className="mx-auto w-full animate-fade-in">
       <Link
         to="/buyer/search"
         className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-secondary transition-colors hover:text-primary"

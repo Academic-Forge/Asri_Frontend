@@ -7,7 +7,7 @@ export const Cart = () => {
 
   if (items.length === 0) {
     return (
-      <section className="mx-auto max-w-4xl animate-fade-in text-center py-16 sm:py-24">
+      <section className="mx-auto w-full animate-fade-in text-center py-16 sm:py-24">
         <ShoppingBag className="mx-auto h-16 w-16 text-neutral/20" />
         <h2 className="mt-4 text-lg font-semibold text-neutral">Keranjang Kosong</h2>
         <p className="mt-1 text-sm text-neutral/50">Belum ada produk di keranjang.</p>
@@ -22,7 +22,7 @@ export const Cart = () => {
   }
 
   return (
-    <section className="mx-auto max-w-4xl animate-fade-in">
+    <section className="mx-auto w-full animate-fade-in">
       <Link
         to="/buyer/search"
         className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-secondary transition-colors hover:text-primary"

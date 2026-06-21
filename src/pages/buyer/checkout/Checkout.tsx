@@ -7,7 +7,7 @@ export const Checkout = () => {
   const totalItems = useCartStore((s) => s.totalItems);
 
   return (
-    <section className="mx-auto max-w-4xl animate-fade-in">
+    <section className="mx-auto w-full animate-fade-in">
       <Link
         to="/buyer/search"
         className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-secondary transition-colors hover:text-primary"

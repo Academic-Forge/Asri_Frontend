@@ -17,7 +17,7 @@ export const CariProduk = () => {
   const filtered = products;
 
   return (
-    <section className="mx-auto max-w-6xl">
+    <section className="mx-auto w-full">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl sm:text-2xl font-bold text-neutral">Cari Produk</h1>

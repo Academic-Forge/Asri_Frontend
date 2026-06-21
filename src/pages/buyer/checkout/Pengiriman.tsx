@@ -23,7 +23,7 @@ export const Pengiriman = () => {
   const ongkir = shipping?.cost ?? 0;
 
   return (
-    <section className="mx-auto max-w-4xl animate-fade-in">
+    <section className="mx-auto w-full animate-fade-in">
       <Link
         to="/buyer/checkout"
         className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-secondary transition-colors hover:text-primary"

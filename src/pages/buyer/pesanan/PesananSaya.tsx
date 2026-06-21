@@ -40,7 +40,7 @@ export const PesananSaya = () => {
   }, [activeTab]);
 
   return (
-    <section className="mx-auto max-w-4xl animate-fade-in">
+    <section className="mx-auto w-full animate-fade-in">
       <h1 className="text-xl sm:text-2xl font-bold text-neutral">Pesanan Saya</h1>
       <p className="mt-1 text-sm text-neutral/50">Daftar pesanan yang masih aktif.</p>
 
