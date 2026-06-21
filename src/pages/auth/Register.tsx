@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { ShoppingBag, Store, Truck, ShieldCheck } from 'lucide-react';
-import logoAsri from '../../assets/img/logo-asri.webp';
+import logoAsri from '../../assets/img/logo-asri-2.webp';
 import daunPepaya from '../../assets/img/daun-pepaya.jpg';
 
 // Sub-form components

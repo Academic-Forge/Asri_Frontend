@@ -1,17 +1,30 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import logo from '../../assets/img/logo-asri-1.webp';
+
+interface NavItem {
+  label: string;
+  icon: LucideIcon;
+  to: string;
+}
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  navItems: NavItem[];
+  logoTo?: string;
+  footerText?: string;
+  showLogo?: boolean;
 }
 
-const navItems = [
-  { label: 'Dashboard', icon: LayoutDashboard, to: '/dashboard' },
-];
-
-export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
+export const Sidebar = ({
+  isOpen,
+  onClose,
+  navItems,
+  logoTo = '/',
+  footerText = 'ASRI v1.0.0',
+  showLogo = true,
+}: SidebarProps) => {
   const { pathname } = useLocation();
 
   return (
@@ -28,13 +41,15 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex h-14 items-center justify-center border-b border-primary/10 sm:h-16">
-          <Link to="/dashboard" onClick={onClose}>
-            <img src={logo} alt="ASRI" className="h-8 w-auto transition-transform hover:scale-105" />
-          </Link>
-        </div>
+        {showLogo && (
+          <div className="flex h-14 items-center justify-center border-b border-primary/10 sm:h-16">
+            <Link to={logoTo} onClick={onClose}>
+              <img src={logo} alt="ASRI" className="h-8 w-auto transition-transform hover:scale-105" />
+            </Link>
+          </div>
+        )}
 
-        <nav className="flex-1 space-y-1 p-4">
+        <nav className={`flex-1 space-y-1 p-4 ${showLogo ? '' : 'pt-6 sm:pt-8'}`}>
           {navItems.map((item) => {
             const isActive = pathname === item.to;
 
@@ -61,7 +76,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
         </nav>
 
         <div className="border-t border-primary/10 p-4">
-          <p className="text-center text-xs text-neutral/30">ASRI v1.0.0</p>
+          <p className="text-center text-xs text-neutral/30">{footerText}</p>
         </div>
       </aside>
     </>
